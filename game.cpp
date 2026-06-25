@@ -63,7 +63,7 @@ int main() {
 
         // DrawText(TextFormat("X: %.1f  Y: %.1f", x, y), x,y+SIZE,20,BLACK);
 
-        DrawFPS(10, 10);
+        // DrawFPS(10, 10);
 
         if (x + textWidth + textWidth/8 >= WIDTH) directionx = -1, directiony = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7);
         if (y + textHeight - textHeight/8 >= HEIGHT) directiony = -1, directionx = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7);
