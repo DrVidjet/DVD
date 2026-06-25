@@ -16,7 +16,7 @@ HDRS :=
 INCS :=
 
 # additional source files
-SRCS := game.cpp
+SRCS := dvd.cpp
 
 # name of executable
 EXEC := DVD

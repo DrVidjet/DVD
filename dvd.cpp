@@ -21,18 +21,21 @@ int main() {
     const int WIDTH = 1920;
     const int HEIGHT = 1080;
     const int SIZE = 200;
-    const float speed = 150;
+    const float speed = 200;
 
 
     InitWindow(WIDTH, HEIGHT, "Raylearn");
     DisableCursor();
     SetTargetFPS(200);
 
-    float x = WIDTH/2-SIZE;
-    float y = HEIGHT/2-SIZE;
+    Vector2 pos;
+    Vector2 vel;
 
-    float directionx = 1;
-    float directiony = -1;
+    pos.x = WIDTH/2-SIZE;
+    pos.y = HEIGHT/2-SIZE;
+
+    vel.x =  ((float)rand() / RAND_MAX) * 2.0f - 1.0f;
+    vel.y = ((float)rand() / RAND_MAX) * 2.0f - 1.0f;
 
     Color color_table[] =
     {
@@ -52,26 +55,23 @@ int main() {
     Font font = GetFontDefault();
     Vector2 size = MeasureTextEx(font, "DVD", SIZE, 0);
 
-    float textWidth  = size.x;
-    float textHeight = size.y;
-
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(BLACK);
 
-        DrawText("DVD",(int)x,(int)y,SIZE,color);
+        DrawText("DVD",pos.x,pos.y,SIZE,color);
 
         // DrawText(TextFormat("X: %.1f  Y: %.1f", x, y), x,y+SIZE,20,BLACK);
 
-        // DrawFPS(10, 10);
+        DrawFPS(10, 10);
 
-        if (x + textWidth + textWidth/8 >= WIDTH) directionx = -1, directiony = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7);
-        if (y + textHeight - textHeight/8 >= HEIGHT) directiony = -1, directionx = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7);
-        if (x <= 0) directionx = 1, directiony = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7);
-        if (y <= 0) directiony = 1, directionx = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7);
+        if (pos.x + size.x + size.x/8 >= WIDTH) vel.x = -1, vel.y = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7), vel = Vector2Normalize(vel);
+        if (pos.y + size.y - size.y/8 >= HEIGHT) vel.y = -1, vel.x = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7), vel = Vector2Normalize(vel);
+        if (pos.x <= 0) vel.x = 1, vel.y = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7), vel = Vector2Normalize(vel);
+        if (pos.y <= 0) vel.y = 1, vel.x = ((float)rand() / RAND_MAX) * 2.0f - 1.0f, RandomColor(color, color_table, 7), vel = Vector2Normalize(vel);
 
-        x += directionx * speed * GetFrameTime();
-        y += directiony * speed * GetFrameTime();
+        pos.x += vel.x * speed * GetFrameTime();
+        pos.y += vel.y * speed * GetFrameTime();
 
         EndDrawing();
     }
