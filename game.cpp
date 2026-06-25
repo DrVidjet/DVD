@@ -20,7 +20,7 @@ void RandomColor(Color& color, Color table[], int size)
 int main() {
     const int WIDTH = 1920;
     const int HEIGHT = 1080;
-    const int SIZE = 100;
+    const int SIZE = 200;
     const float speed = 150;
 
 

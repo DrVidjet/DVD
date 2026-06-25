@@ -19,7 +19,7 @@ INCS :=
 SRCS := game.cpp
 
 # name of executable
-EXEC := test
+EXEC := DVD
 
 # generate object file names
 OBJS := $(SRCS:.cpp=.o)
